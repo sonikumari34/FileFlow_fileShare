@@ -18,6 +18,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'))
 
+app.get('/', (req, res) => {
+    res.send('API is running 🚀');
+  });
+
 
 
 export {app};
