@@ -12,7 +12,6 @@ import {
   FaWhatsapp,
   FaDownload,
   FaCopy,
-  FaEllipsisV,
   FaTrash,
 } from "react-icons/fa";
 import { useRef, useState } from "react";
@@ -61,7 +60,7 @@ const FilePreview = () => {
   };
 
   const handleDownloadQR = async (path) => {
-    const qrSvg = qrCodeRef.current[path].querySelector("svg");
+    const qrSvg = qrCodeRef.current[path]?.querySelector("svg");
     if (qrSvg) {
       try {
         const canvas = await convertSVGToCanvas(qrSvg);
@@ -111,6 +110,7 @@ const FilePreview = () => {
                   <span className="text-lg font-semibold text-blue-700 truncate" title={file.data.name}>{file.data.name}</span>
                   <span className="text-xs bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full font-semibold">{file.data.type.split('/')[1]?.toUpperCase()}</span>
                 </div>
+
                 <div className="flex items-center gap-4">
                   {file.data.type.startsWith("image") && (
                     <img
@@ -131,6 +131,15 @@ const FilePreview = () => {
                     <div className="text-gray-400 text-xs">Uploaded: {new Date(file.data.createdAt).toLocaleString()}</div>
                   </div>
                 </div>
+
+                {/* Hidden QR Code */}
+                <div
+                  ref={(el) => (qrCodeRef.current[file.path] = el)}
+                  className="hidden"
+                >
+                  <QRCode value={file.path} size={128} />
+                </div>
+
                 <div className="flex flex-wrap gap-2 mt-2">
                   <button
                     onClick={() => handleDownload(file.path, file.data.name)}
@@ -157,6 +166,7 @@ const FilePreview = () => {
                     <FaTrash /> Delete
                   </button>
                 </div>
+
                 <div className="flex gap-3 mt-2 justify-end">
                   <FacebookShareButton url={file.path} title="Share on Facebook">
                     <FaFacebook className="text-blue-600 hover:text-blue-800 transition-colors duration-200" size={22} />
