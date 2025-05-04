@@ -8,8 +8,9 @@ import morgan from "morgan"
 const app=express();
 
 app.use(cors({
+   // origin: 'https://file-flow-file-share.vercel.app',
     origin:process.env.CLIENT_URL,
-    Credential:true
+    credentials:true
 }))
 
 app.use(cookieParser());
