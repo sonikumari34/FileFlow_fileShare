@@ -1,4 +1,4 @@
-import { File } from '../models/file.models.js';
+import { File } from "../models/file.models.js";
 
 
 const uploadFiles = async (req, res) => {
@@ -7,7 +7,7 @@ const uploadFiles = async (req, res) => {
   }
   const SERVER_URL = process.env.SERVER_URL;
  
-  const fileObj={
+  const fileObj = {
     //path: req.file.path,  //local use
     path:`${SERVER_URL}/uploads/${req.file.filename}`,
     name: req.file.originalname, 
@@ -46,7 +46,7 @@ const downloadFile=async (req,res)=>{
         console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
 
 
 
