@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 function Header() {
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  
   const isUploadOrPreview = location.pathname === "/upload" || location.pathname === "/preview";
 
   return (

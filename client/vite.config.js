@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api/files': 'http://localhost:6600',
+      //'/api/files': 'http://localhost:6600',   //for local host
+      "/api/files": "https://fileflow-fileshare.onrender.com/",  // deployed  
     },
   },
 })

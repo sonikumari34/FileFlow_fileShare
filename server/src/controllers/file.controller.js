@@ -5,28 +5,36 @@ const uploadFiles = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No files uploaded' });
   }
+  const SERVER_URL = process.env.SERVER_URL;
  
   const fileObj={
-    path: req.file.path,
+    //path: req.file.path,  //local use
+    path:`${SERVER_URL}/uploads/${req.file.filename}`,
     name: req.file.originalname, 
     type: req.file.mimetype, 
     size: req.file.size
-  }
-  const SERVER_URL=process.env.SERVER_URL;
+  };
+  
 
   try {
     const file=await File.create(fileObj);
     res.status(200).json({
         msg:"File Uploaded Successfully",
-        path:`${SERVER_URL}/file/${file._id}`,
+        //path:`${SERVER_URL}/file/${file._id}`,
+        path:fileObj.path, // this is public url for preview
         data:file
-    })
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
   
 };
+ 
+
+
+
+
 
 const downloadFile=async (req,res)=>{
     try {
@@ -41,4 +49,11 @@ const downloadFile=async (req,res)=>{
 }
 
 
-export {uploadFiles,downloadFile}
+
+
+
+
+
+
+
+export {uploadFiles,downloadFile};

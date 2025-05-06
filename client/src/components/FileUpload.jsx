@@ -59,7 +59,7 @@ const FileUpload = () => {
         >
           <input {...getInputProps()} />
           {file ? (
-            <p className="text-green-500">{file.name}</p>
+            <p className="text-blue-500">{file.name}</p>
           ) : (
             <p className="text-gray-500 text-center">
               Drag 'n' drop a file here, or click to select a file
